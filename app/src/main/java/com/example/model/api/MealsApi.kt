@@ -1,5 +1,7 @@
 package com.example.model.api
 
+
+
 import com.example.model.response.MealsCategoriesResponses
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -16,15 +18,17 @@ class MealsWebService {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-       api = retrofit.create(MealsApi::class.java)
+        api = retrofit.create(MealsApi::class.java)
     }
 
-    fun getMeals(): Call<MealsCategoriesResponses> {
+    suspend fun getMeals(): MealsCategoriesResponses {
         return api.getMeals()
     }
 
     interface MealsApi {
         @GET("categories.php")
-        fun getMeals(): Call<MealsCategoriesResponses>
+        suspend fun getMeals(): MealsCategoriesResponses
     }
+
+
 }
